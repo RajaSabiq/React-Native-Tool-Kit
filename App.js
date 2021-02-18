@@ -1,31 +1,27 @@
 import { StatusBar } from "expo-status-bar";
 import React, { useState } from "react";
-import { StyleSheet, Text, View, TextInput, Button } from "react-native";
-import { logo } from "./assets/favicon.png";
+import { StyleSheet, Text, View, ScrollView } from "react-native";
 
 export default function App() {
-  const [myName, setMyName] = useState("Raja");
-  const [person, setPerson] = useState({ name: "Hajra", age: 100 });
-  const updateName = () => {
-    setMyName("Sabiq");
-    setPerson({ name: "Bajwa", age: 50 });
-  };
+  const [myName, setMyName] = useState([
+    { name: "Sabiq", key: "1" },
+    { name: "Kumail", key: "2" },
+    { name: "Zaka", key: "3" },
+    { name: "Umer", key: "4" },
+    { name: "Asad", key: "5" },
+    { name: "Shari", key: "6" },
+    { name: "Ahmad", key: "7" },
+  ]);
 
   return (
     <View style={styles.container}>
-      <Text>Enter your name</Text>
-      <TextInput
-        style={styles.TextInput}
-        placeholder="eg Raja Sabiq"
-        onChangeText={(e) => setMyName(e)}
-      />
-      <Text>My Name is {myName}</Text>
-      <Text>
-        My Name is {person.name} and age is {person.age}
-      </Text>
-      <View style={styles.btnContainer}>
-        <Button title="Click me" onPress={updateName} />
-      </View>
+      <ScrollView>
+        {myName.map((item) => (
+          <View key={item.key}>
+            <Text style={styles.item}>{item.name}</Text>
+          </View>
+        ))}
+      </ScrollView>
     </View>
   );
 }
@@ -37,13 +33,11 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
-  btnContainer: {
-    marginTop: 10,
-  },
-  TextInput: {
-    borderWidth: 1,
-    borderColor: "#000",
-    height: 35,
-    padding: 8,
+  item: {
+    padding: 30,
+    margin: 25,
+    backgroundColor: "#000",
+    color: "#fff",
+    width: 300,
   },
 });
